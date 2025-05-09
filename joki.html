@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jasa Joki Game - willpedia.id</title>
+    <style>
+        /* Gaya Global */
+        body {
+            font-family: 'Noto Sans JP', sans-serif; /* Font Jepang yang tegas */
+            background: #222; /* Latar belakang gelap */
+            margin: 0;
+            padding: 0;
+            color: #ddd; /* Teks berwarna terang */
+            line-height: 1.6;
+        }
+
+        /* Navigasi Bar */
+        .navbar {
+            background-color: #333; /* Abu-abu gelap */
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Bayangan lebih kuat */
+        }
+
+        .navbar-logo {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        .navbar-logo img {
+            max-height: 60px;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
+        .navbar-links {
+            display: flex;
+        }
+
+        .navbar-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-links a:hover {
+            background-color: #555; /* Abu-abu lebih terang saat hover */
+        }
+
+        /* Container */
+        .container {
+            padding: 30px;
+        }
+
+        /* Judul */
+        h1, h2 {
+            text-align: center;
+            color: #e62e00; /* Merah menyala */
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 2.5em;
+        }
+
+        h2 {
+            font-size: 1.8em;
+        }
+
+        /* Bagian Game */
+        .game-section {
+            background: #444; /* Abu-abu gelap */
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Bayangan lebih kuat */
+            border: 1px solid #666; /* Garis tepi lebih gelap */
+        }
+
+        /* Elemen Formulir */
+        select, button, input {
+            width: calc(100% - 22px);
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 16px;
+            box-sizing: border-box;
+            border: 1px solid #888; /* Garis tepi lebih gelap */
+            border-radius: 8px;
+            background-color: #555; /* Latar belakang lebih gelap */
+            color: #fff; /* Teks berwarna terang */
+        }
+
+        select {
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="currentColor" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            background-size: 16px;
+        }
+
+        button {
+            background-color: #e62e00; /* Merah menyala */
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #b31b00; /* Merah lebih gelap saat hover */
+        }
+
+        /* Tampilan Harga */
+        .price-display {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #ffcc00; /* Kuning emas */
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        /* Sub-Select */
+        .sub-select {
+            display: none;
+            margin-top: 15px;
+        }
+
+        /* Daftar Benefit */
+        .benefit-list {
+            margin-top: 15px;
+            padding-left: 25px;
+            font-size: 15px;
+            color: #aaa; /* Abu-abu lebih terang */
+        }
+
+        .benefit-list h3 {
+            margin-top: 10px;
+            color: #e62e00; /* Merah menyala */
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .benefit-list li {
+            margin-bottom: 8px;
+            list-style-type: disc;
+        }
+
+        .benefit-list li::before {
+            content: ""; /* Ikon pedang samurai */
+            color: #ffcc00; /* Kuning emas */
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+            }
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .navbar-logo {
+                margin-bottom: 15px;
+            }
+            .container {
+                padding: 20px;
+            }
+            .game-section {
+                padding: 20px;
+                margin: 20px auto;
+            }
+            select, button, input {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+
+        /* Font Tambahan (Google Fonts) */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2><span style="font-size: 1.2em;"></span>WILLPEDIA.ID</h2>
+
+        <div class="game-section">
+            <h2><span style="font-size: 1.1em;"></span> Genshin Impact</h2>
+            <select id="genshinSelect" onchange="handleGenshinChange()">
+                <option value=""> Pilih Jasa</option>
+                <option value="spiralAbyss">Joki Spiral Abyss</option>
+                <option value="rawatAkun">Joki Rawat Akun</option>
+                <option value="dropMonster">Joki Drop Monster</option>
+                <option value="jokiQuest">Joki Quest</option>
+                <option value="theCatch">Joki The Catch</option>
+                <option value="ferryman">Joki Fleuve Cendre Ferryman</option>
+                <option value="aranyaka">Joki Aranyaka</option>
+                <option value="aranara">Joki 76 Aranara</option>
+                <option value="imaginarium">Joki Imaginarium Theater</option>
+            </select>
+
+            <select id="floorSelect" class="sub-select" onchange="updatePrice(this)">
+                <option value=""><span style="color: #e62e00;"></span> Pilih Floor</option>
+                <option value="Floor 9|Rp 1.000 / Star">Floor 9</option>
+                <option value="Floor 10|Rp 1.000 / Star">Floor 10</option>
+                <option value="Floor 11|Rp 1.500 / Star">Floor 11</option>
+                <option value="Floor 12|Rp 2.000 / Star">Floor 12</option>
+            </select>
+
+            <div id="rawatAkunOptions" class="sub-select">
+                <select id="waktuSelect" onchange="updatePrice(this)">
+                    <option value=""><span style="color: #e62e00;"></span> Pilih Durasi</option>
+                    <option value="Harian|Rp 10.000 per hari">Harian</option>
+                    <option value="Mingguan|Rp 50.000 per minggu">Mingguan</option>
+                    <option value="Bulanan|Rp 150.000 per bulan">Bulanan</option>
+                </select>
+                <div class="benefit-list">
+                    <h3>Benefit Rawat Akun:</h3>
+                    <ul>
+                        <li>✅ Misi harian selesai setiap hari</li>
+                        <li>✅ Penggunaan Resin Optimal (bisa request)</li>
+                        <li>✅ Pengumpulan material penting (bisa request)</li>
+                        <li>✅ Event-event kecil</li>
+                        <li>✅ Spiral Abyss & Imaginarium Theater Dikerjain</li>
+                        <li>✅ Reputasi Region</li>
+                    </ul>
+                </div>
+            </div>
+
+            <select id="dropMonsterSelect" class="sub-select" onchange="updatePrice(this)">
+                <option value=""><span style="color: #e62e00;"></span> Pilih Material</option>
+                <option value="Material B1|Rp 100 / 1 item">Material B1</option>
+                <option value="Material B2|Rp 200 / 1 item">Material B2</option>
+                <option value="Material B3|Rp 250 / 1 item">Material B3</option>
+                <option value="Material B4|Rp 350 / 1 item">Material B4</option>
+            </select>
+
+            <select id="questTypeSelect" class="sub-select" onchange="updatePrice(this)">
+                <option value=""><span style="color: #e62e00;"></span> Pilih Jenis Quest</option>
+                <option value="Archon Quest|Rp 25.000 / Bagian">Archon Quest</option>
+                <option value="World Quest|Rp 5.000 - Rp 35.000">World Quest</option>
+            </select>
+
+            <select id="catchSelect" class="sub-select" onchange="updatePrice(this)">
+                <option value=""><span style="color: #e62e00;"></span> Pilih Varian</option>
+                <option value="The Catch R1|Rp 25.000">The Catch R1</option>
+                <option value="Refine Only|Rp 15.000">Refine Only</option>
+                <option value="The Catch R5|Rp 65.000">The Catch R5</option>
+            </select>
+
+            <select id="ferrymanSelect" class="sub-select" onchange="updatePrice(this)">
+                <option value=""><span style="color: #e62e00;"></span> Pilih Varian</option>
+                <option value="Fleuve Cendre Ferryman R1|Rp 25.000">Fleuve Cendre Ferryman R1</option>
+                <option value="Refine Only|Rp 15.000">Refine Only</option>
+                <option value="Fleuve Cendre Ferryman R1|Rp 65.000">Fleuve Cendre Ferryman</option>
+            </select>
+
+            <select id="aranyakaSelect" class="sub-select" onchange="updatePrice(this)">
+                <option value=""><span style="color: #e62e00;"></span> Pilih Part</option>
+                <option value="Part 1|Rp 10.000">Part 1</option>
+                <option value="Part 2|Rp 100.000">Part 2</option>
+                <option value="Part 3|Rp 15.000">Part 3</option>
+                <option value="Part 4|Rp 15.000">Part 4</option>
+                <option value="All Parts|Rp 150.000">All Parts</option>
+            </select>
+
+            <select id="aranaraSelect" class="sub-select" onchange="updatePrice(this)">
+                <option value=""><span style="color: #e62e00;"></span> Pilih Varian</option>
+                <option value="1 Aranara|Rp 1.000">1 Aranara</option>
+                <option value="All Aranara (76 total)|Rp 76.000">All Aranara (76 total)</option>
+            </select>
+
+            <select id="imaginariumSelect" class="sub-select" onchange="updatePrice(this)">
+                <option value=""><span style="color: #e62e00;"></span> Pilih Mode</option>
+                <option value="Easy Mode|Rp 10.000">Easy Mode</option>
+                <option value="Normal Mode|Rp 20.000">Normal Mode</option>
+                <option value="Hard Mode|Rp 25.000">Hard Mode</option>
+                <option value="Visionary Mode|Rp 30.000">Visionary Mode</option>
+            </select>
+
+            <div class="price-display" id="genshinPrice"></div>
+            <button onclick="orderGenshin()">Pesan via WhatsApp <span style="font-size: 1.2em;"></span></button>
+        </div>
+    </div>
+
+    <script>
+        const phoneNumber = '6281357706121';
+
+        function handleGenshinChange() {
+            const value = document.getElementById("genshinSelect").value;
+            document.querySelectorAll('.sub-select').forEach(el => {
+                el.style.display = 'none';
+                el.value = '';
+            });
+            document.getElementById("genshinPrice").textContent = '';
+
+            if (value === "spiralAbyss") document.getElementById("floorSelect").style.display = 'block';
+            if (value === "rawatAkun") document.getElementById("rawatAkunOptions").style.display = 'block';
+            if (value === "dropMonster") document.getElementById("dropMonsterSelect").style.display = 'block';
+            if (value === "jokiQuest") document.getElementById("questTypeSelect").style.display = 'block';
+            if (value === "theCatch") document.getElementById("catchSelect").style.display = 'block';
+            if (value === "ferryman") document.getElementById("ferrymanSelect").style.display = 'block';
+            if (value === "aranyaka") document.getElementById("aranyakaSelect").style.display = 'block';
+            if (value === "aranara") document.getElementById("aranaraSelect").style.display = 'block';
+            if (value === "imaginarium") document.getElementById("imaginariumSelect").style.display = 'block';
+        }
+
+        function updatePrice(selectElement) {
+            const value = selectElement.value;
+            const priceDiv = document.getElementById("genshinPrice");
+            if (value) {
+                const [label, price] = value.split('|');
+                priceDiv.textContent = `Harga: ${price}`;
+            } else {
+                priceDiv.textContent = '';
+            }
+        }
+
+        function orderGenshin() {
+            const main = document.getElementById("genshinSelect").value;
+            const floor = document.getElementById("floorSelect").value;
+            const waktu = document.getElementById("waktuSelect").value;
+            const dropMonster = document.getElementById("dropMonsterSelect").value;
+            const questType = document.getElementById("questTypeSelect").value;
+            const catchOpt = document.getElementById("catchSelect").value;
+            const ferryman = document.getElementById("ferrymanSelect").value;
+            const aranyaka = document.getElementById("aranyakaSelect").value;
+            const aranara = document.getElementById("aranaraSelect").value;
+            const imaginarium = document.getElementById("imaginariumSelect").value;
+
+            let service = '', detail = '', price = '';
+
+            if (!main) {
+                alert("Silakan pilih jasa terlebih dahulu.");
+                return;
+            }
+
+            if (main === 'spiralAbyss' && floor) {
+                [detail, price] = floor.split('|');
+                service = `Joki Spiral Abyss - ${detail}`;
+            } else if (main === 'rawatAkun' && waktu) {
+                [detail, price] = waktu.split('|');
+                service = `Joki Rawat Akun - ${detail}`;
+            } else if (main === 'dropMonster' && dropMonster) {
+                [detail, price] = dropMonster.split('|');
+                service = `Joki Drop Monster - ${detail}`;
+            } else if (main === 'jokiQuest' && questType) {
+                [detail, price] = questType.split('|');
+                service = `Joki Quest - ${detail}`;
+            } else if (main === 'theCatch' && catchOpt) {
+                [detail, price] = catchOpt.split('|');
+                service = `Joki The Catch - ${detail}`;
+            } else if (main === 'ferryman' && ferryman) {
+                [detail, price] = ferryman.split('|');
+                service = `Joki Fleuve Cendre Ferryman - ${detail}`;
+            } else if (main === 'aranyaka' && aranyaka) {
+                [detail, price] = aranyaka.split('|');
+                service = `Joki Aranyaka - ${detail}`;
+            } else if (main === 'aranara' && aranara) {
+                [detail, price] = aranara.split('|');
+                service = `Joki 76 Aranara - ${detail}`;
+            } else if (main === 'imaginarium' && imaginarium) {
+                [detail, price] = imaginarium.split('|');
+                service = `Joki Imaginarium Theater - ${detail}`;
+            } else if (main.includes('|')) {
+                [service, price] = main.split('|');
+            } else {
+                alert("Silakan lengkapi pilihan sub-menu.");
+                return;
+            }
+
+            
+            const msg = `Halo, saya ingin pesan jasa joki untuk *Genshin Impact*.\nLayanan: *${service}*\nHarga: ${price}`;
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        }
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joki Game - Willpedia.id</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
+      margin: 0;
+      padding: 20px;
+      color: #00ffe7;
+    }
+
+    .game-section {
+      background: #121221;
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 600px;
+      margin: 30px auto;
+      border: 1px solid #00ffe7;
+      box-shadow: 0 0 20px rgba(0, 255, 231, 0.2);
+    }
+
+    h2 {
+      text-align: center;
+      color: #ff007a;
+      margin-bottom: 25px;
+    }
+
+    select, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 2px solid #00ffe7;
+      background-color: #1b1b2f;
+      color: #00ffe7;
+      box-sizing: border-box;
+    }
+
+    select {
+      appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg fill="%2300ffe7" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 16px;
+    }
+
+    button {
+      background-color: #ff007a;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #cc005f;
+    }
+
+    .price-display {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #ffd700;
+      text-align: center;
+      font-size: 1.3em;
+    }
+
+    .sub-select {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="game-section">
+    <h2>Genshin Impact</h2>
+    <select id="genshinMenu" onchange="handleGenshinMenu()">
+      <option value="">Pilih Jenis Joki</option>
+      <option value="catch">Joki The Catch</option>
+      <option value="abyss">Joki Spiral Abyss</option>
+    </select>
+
+    <select id="catchSelect" class="sub-select" onchange="updateGenshinPrice(this)">
+      <option value="">Pilih Varian</option>
+      <option value="The Catch R1|Rp 25.000">The Catch R1</option>
+      <option value="Refine Only|Rp 15.000">Refine Only</option>
+      <option value="The Catch R5|Rp 65.000">The Catch R5</option>
+    </select>
+
+    <select id="abyssSelect" class="sub-select" onchange="updateGenshinPrice(this)">
+      <option value="">Pilih Floor</option>
+      <option value="Floor 9|Rp 1.000">Floor 9</option>
+      <option value="Floor 10|Rp 1.000">Floor 10</option>
+      <option value="Floor 11|Rp 1.500">Floor 11</option>
+      <option value="Floor 12|Rp 2.000">Floor 12</option>
+    </select>
+
+    <div class="price-display" id="genshinPrice"></div>
+    <button onclick="orderGenshin()">Pesan via WhatsApp</button>
+  </div>
+
+  <div class="game-section">
+    <h2>Honkai: Star Rail</h2>
+    <select id="hsrSelect" onchange="updatePrice('hsrSelect', 'hsrPrice')">
+      <option value="">Pilih Jasa</option>
+      <option value="Simulated Universe|Rp 25.000">Simulated Universe</option>
+      <option value="Memory of Chaos|Rp 35.000">Memory of Chaos</option>
+    </select>
+    <div class="price-display" id="hsrPrice"></div>
+    <button onclick="orderHSR()">Pesan via WhatsApp</button>
+  </div>
+
+  <div class="game-section">
+    <h2>Wuthering Waves</h2>
+    <select id="wwSelect" onchange="updatePrice('wwSelect', 'wwPrice')">
+      <option value="">Pilih Jasa</option>
+      <option value="Daily Quest|Rp 15.000">Daily Quest</option>
+      <option value="Boss Farming|Rp 20.000">Boss Farming</option>
+    </select>
+    <div class="price-display" id="wwPrice"></div>
+    <button onclick="orderWW()">Pesan via WhatsApp</button>
+  </div>
+
+  <div class="game-section">
+    <h2>Zenless Zone Zero</h2>
+    <select id="zzzSelect" onchange="updatePrice('zzzSelect', 'zzzPrice')">
+      <option value="">Pilih Jasa</option>
+      <option value="Commissions|Rp 18.000">Commissions</option>
+      <option value="Hollow Zero|Rp 25.000">Hollow Zero</option>
+    </select>
+    <div class="price-display" id="zzzPrice"></div>
+    <button onclick="orderZZZ()">Pesan via WhatsApp</button>
+  </div>
+
+  <script>
+    const phoneNumber = '6281357706121';
+
+    function handleGenshinMenu() {
+      const menu = document.getElementById("genshinMenu").value;
+      document.getElementById("catchSelect").style.display = 'none';
+      document.getElementById("abyssSelect").style.display = 'none';
+      document.getElementById("genshinPrice").textContent = '';
+
+      if (menu === "catch") {
+        document.getElementById("catchSelect").style.display = 'block';
+      } else if (menu === "abyss") {
+        document.getElementById("abyssSelect").style.display = 'block';
+      }
+    }
+
+    function updateGenshinPrice(select) {
+      const value = select.value;
+      if (value) {
+        const price = value.split('|')[1];
+        document.getElementById("genshinPrice").textContent = `Harga: ${price}`;
+      } else {
+        document.getElementById("genshinPrice").textContent = '';
+      }
+    }
+
+    function updatePrice(selectId, priceId) {
+      const value = document.getElementById(selectId).value;
+      if (value) {
+        const price = value.split('|')[1];
+        document.getElementById(priceId).textContent = `Harga: ${price}`;
+      } else {
+        document.getElementById(priceId).textContent = '';
+      }
+    }
+
+    function orderGenshin() {
+      const menu = document.getElementById("genshinMenu").value;
+      let selectedValue = '';
+
+      if (menu === "catch") {
+        selectedValue = document.getElementById("catchSelect").value;
+      } else if (menu === "abyss") {
+        selectedValue = document.getElementById("abyssSelect").value;
+      }
+
+      if (!selectedValue) {
+        alert("Silakan pilih sub-menu terlebih dahulu.");
+        return;
+      }
+
+      const [layanan, harga] = selectedValue.split('|');
+      const msg = `Saya ingin pesan jasa Genshin Impact:\nLayanan: ${layanan}\nHarga: ${harga}`;
+      window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function orderHSR() {
+      const value = document.getElementById("hsrSelect").value;
+      if (!value) return alert("Pilih jasa HSR dulu");
+      const [label, harga] = value.split('|');
+      const msg = `Saya ingin pesan jasa Honkai Star Rail:\nLayanan: ${label}\nHarga: ${harga}`;
+      window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function orderWW() {
+      const value = document.getElementById("wwSelect").value;
+      if (!value) return alert("Pilih jasa Wuthering Waves dulu");
+      const [label, harga] = value.split('|');
+      const msg = `Saya ingin pesan jasa Wuthering Waves:\nLayanan: ${label}\nHarga: ${harga}`;
+      window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function orderZZZ() {
+      const value = document.getElementById("zzzSelect").value;
+      if (!value) return alert("Pilih jasa ZZZ dulu");
+      const [label, harga] = value.split('|');
+      const msg = `Saya ingin pesan jasa Zenless Zone Zero:\nLayanan: ${label}\nHarga: ${harga}`;
+      window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+  </script>
+
+</body>
+</html>
